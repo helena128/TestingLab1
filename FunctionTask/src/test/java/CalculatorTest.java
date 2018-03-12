@@ -3,7 +3,7 @@ package test.java;
 import main.java.Calculator;
 import org.junit.Test;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertTrue;
 import static java.lang.Math.*;
 
 public class CalculatorTest {
@@ -13,7 +13,7 @@ public class CalculatorTest {
     @Test
     public void testCalcArcCos1() {
         try {
-            assertTrue("Test #1", isEqual(-1)); // TODO: fails
+            assertTrue("Test #1", isEqual(-1));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -50,41 +50,9 @@ public class CalculatorTest {
         Calculator test = new Calculator();
         double originalRes = acos(x);
         double customRes = test.calculateArcCos(x);
-        System.out.println("\n\norigX: " + originalRes + "\ncustom: " + customRes);
+        //System.out.println("\n\norigX: " + originalRes + "\ncustom: " + customRes); // debug
         return abs(originalRes - customRes) < EPS;
     }
 
-    // Testing other features
-    // TODO: divide into classes
-    /*
-    @Test
-    public void testCalculateMembers0() {
-        Calculator test = new Calculator();
-        assertTrue("Test 0", (test.calculateMember(0).doubleValue() == 1));
-    }
 
-    @Test
-    public void testCalculateMembers1() {
-        Calculator test = new Calculator();
-        assertTrue("Test 1", (test.calculateMember(1).doubleValue() == 1 / 6));
-    }
-
-    @Test
-    public void testCalculateMembers2() {
-        Calculator test = new Calculator();
-        assertTrue("Test 2", (test.calculateMember(2).doubleValue() == 3 / 40));
-    }
-
-    @Test
-    public void testCalculateMembers3() {
-        Calculator test = new Calculator();
-        assertTrue("Test 3", (test.calculateMember(3).doubleValue() == 5 / 112));
-    }
-
-    @Test
-    public void testCalculateMembers4() {
-        Calculator test = new Calculator();
-        assertTrue("Test 4", (test.calculateMember(4).doubleValue() == 35 / 1152));
-    }
-    */
 }
