@@ -6,7 +6,7 @@ import static java.lang.Math.*;
  * Class performing operation
  */
 public class Calculator {
-    private static final Double EPS = 1e-10; // mistake
+    public static final Double EPS = 1e-10; // mistake
 
     public double calculateArcCos(double x) {
         // check the range for x
