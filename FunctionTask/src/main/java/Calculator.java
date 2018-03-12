@@ -17,7 +17,7 @@ public class Calculator {
 
         BigDecimal sum = BigDecimal.ZERO, xn;
         for (int i = 0; i < NUM_STEPS; i++) {
-            xn = calculateMember(i).multiply((BigDecimal.valueOf(x)).pow(2 * i + 1));
+            xn = calculateCoefficient(i).multiply((BigDecimal.valueOf(x)).pow(2 * i + 1));
             sum = sum.add(xn);
         }
 
@@ -45,7 +45,7 @@ public class Calculator {
      * @param n
      * @return
      */
-    public BigDecimal calculateMember(int n) {
+    public BigDecimal calculateCoefficient(int n) {
         BigDecimal divider = BigDecimal.valueOf(4).pow(n);
         divider = divider.multiply(fact(n).pow(2));
         divider = divider.multiply(BigDecimal.valueOf(2 * n + 1));
