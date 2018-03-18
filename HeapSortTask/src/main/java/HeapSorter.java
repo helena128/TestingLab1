@@ -1,19 +1,22 @@
 package main.java;
 
-
 public class HeapSorter {
-    private static final int MAX_CHARS = 80;
 
     private int[] arr;
     private int n;
-    private int step;
+
+    private ActionHolder actionHolder; // for testing
 
     public HeapSorter(int[] arr) {
         this.arr = arr;
         if (arr != null) {
             n = arr.length;
-            step = 0;
+            actionHolder = new ActionHolder();
         } else throw new IllegalArgumentException("Array is null or its size is less than 1");
+    }
+
+    public ActionHolder getActionHolder() {
+        return actionHolder;
     }
 
     public int[] sort() {
@@ -24,6 +27,8 @@ public class HeapSorter {
         System.out.println("Sorting started!");
         buildHeap();
 
+        System.out.println("Sorted array: ");
+        printArray();
         return arr;
     }
 
@@ -34,17 +39,6 @@ public class HeapSorter {
     }
 
     private void heapify(int idx) {
-        /*int childIdx = 2 * parentIdx;
-        while (childIdx <= last) {
-            if (childIdx + 1 <= last && arr[childIdx + 1] > arr[childIdx])
-                childIdx++;
-            if (arr[childIdx] > arr[parentIdx])
-                swap(childIdx, parentIdx);
-            parentIdx = childIdx;
-            childIdx = 2 * parentIdx;
-        }*/
-        step++;
-        System.out.println("Step: " + step);
         int largest = idx;
         int leftIndex = 2 * idx + 1;
         int rightIndex = 2 * idx + 2;
@@ -58,9 +52,12 @@ public class HeapSorter {
 
         if (largest != idx) {
             swap(idx, largest);
-            System.out.println("\tSwapped: " + arr[idx] + " and " + arr[largest]);
+            System.out.println("Swapped: " + arr[idx] + " and " + arr[largest]);
+            actionHolder.update(new Action(arr[idx], arr[largest], ActionType.SWAP));
             heapify(largest);
-        } else System.out.println("\tNo swap");
+        } else {
+            actionHolder.update(new Action(arr[idx], arr[largest], ActionType.NO_ACTION));
+        }
     }
 
     private void swap(int idx1, int idx2) {

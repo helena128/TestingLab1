@@ -1,8 +1,9 @@
 package test.java;
 
+import main.java.ActionType;
+import main.java.Action;
 import main.java.HeapSorter;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -12,37 +13,34 @@ import static org.junit.Assert.assertTrue;
 public class HeapSorterTest {
 
     private final static int ARRAY_BOUNDRY = 1000;
-    private final static int NUM_TESTS = 50;
-    private final static int NUM_OF_ELEMENTS_BOUNDRY = 50;
+    private final static int NUM_OF_ELEMENTS = 31;
 
     @Test
-    @DisplayName("Testing one element")
-    public void testSort1() {
-        int[] a = createRandomArray(1);
+    public void testSortingOneElement() {
+        Random rand = new Random();
+        int[] a = { rand.nextInt(1000) };
         assertTrue(tester(a));
     }
 
     // check null value
     @Test(expected = IllegalArgumentException.class)
-    public void testSort2() {
+    public void shouldGiveException() {
         int[] a = null;
         assertTrue(tester(a));
     }
 
-    @Test
-    public void testSort3() {
-        int[] arr = {906, 213, 327, 219, 804, 527, 226, 508, 298, 28, 130,
-            150, 237, 985, 427, 89, 306, 403, 534, 981, 343, 856, 253, 997, 778,
-            596, 886, 951, 121, 988, 541};
-        assertTrue(tester(arr));
-    }
 
     @Test
-    public void testSort4() {
+    public void testSort1() {
         int[] arr = {754, 510, 334, 432, 732, 88, 952, 880, 215, 812, 189,
             434, 80, 407, 439, 237, 731, 481, 630, 737, 976, 69, 397, 215,
             122, 145, 628, 748, 612, 150, 905};
-        assertTrue(tester(arr));
+        assertTrue(tester(arr)); // check the result
+
+
+        HeapSorter test = new HeapSorter(arr);
+        assertTrue(test.getActionHolder().contains(new Action(628, 80, ActionType.SWAP))); // TODO: fails here
+        // TODO: add more assertions and more tests
     }
 
     private boolean tester(int[] arr) {
@@ -53,10 +51,10 @@ public class HeapSorterTest {
     }
 
 
-    private int[] createRandomArray(int n) {
-        int[] arr = new int[n];
+    private int[] createRandomArray() {
+        int[] arr = new int[NUM_OF_ELEMENTS];
         Random random = new Random();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < NUM_OF_ELEMENTS; i++) {
             arr[i] = random.nextInt(ARRAY_BOUNDRY);
         }
         return arr;
@@ -67,9 +65,5 @@ public class HeapSorterTest {
         HeapSorter heapSorter = new HeapSorter(arr);
         heapSorter.sort();
     }*/
-
-    private int getNumOfElements() {
-        return new Random().nextInt(NUM_OF_ELEMENTS_BOUNDRY);
-    }
 
 }
