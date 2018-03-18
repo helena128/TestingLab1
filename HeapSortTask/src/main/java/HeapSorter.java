@@ -21,13 +21,10 @@ public class HeapSorter {
         printArray();
 
         //printTree();
-        sortTree();
+        System.out.println("Sorting started!");
+        buildHeap();
 
         return arr;
-    }
-
-    private void sortTree() {
-        buildHeap();
     }
 
     private void buildHeap() {
@@ -76,36 +73,5 @@ public class HeapSorter {
         for (int a : arr)
             System.out.print(a + "\t");
         System.out.println();
-    }
-
-    private void printTree() {
-        StringAlignUtils utils;
-        int j;
-        for (int i = 0; i < arr.length; i += j) {
-            j = i + 1;
-            utils = new StringAlignUtils(MAX_CHARS, StringAlignUtils.Alignment.CENTER);
-            int[] nodes = new int[j];
-            //System.out.println("i: " + i + "\tj: " + j);
-
-            System.out.print(utils.format(arrToString(nodes, '\t')));
-        }
-        /*for (int i = 0; i < n; i ++) {
-            int[] tmp = tree[i];
-            //System.out.println("i = " + i);
-            if (tree[i] != null) {
-                for (int j = 0; j < tmp.length; j++) {
-                    //System.out.println("j = " + j);
-                }
-                System.out.println();
-            }
-        }*/
-    }
-
-    private static String arrToString(int[] arr, char delimiter) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < arr.length; i++) {
-            stringBuilder.append(arr[i]).append(delimiter);
-        }
-        return stringBuilder.append('\n').toString();
     }
 }
