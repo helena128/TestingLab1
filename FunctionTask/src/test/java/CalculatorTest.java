@@ -1,57 +1,43 @@
 package test.java;
 
 import main.java.Calculator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
-import static java.lang.Math.*;
+import static junit.framework.Assert.assertEquals;
+import static java.lang.Math.acos;
+import static java.lang.Math.sqrt;
 
 public class CalculatorTest {
 
     private static final double EPS = 0.05;
 
+    private static Calculator test;
+
+    @BeforeClass
+    public static void setUp() {
+        test = new Calculator();
+    }
+
     @Test
     public void testCalcArcCos1() {
-        try {
-            assertTrue("Test #1", isEqual(-1));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        test = new Calculator();
+        assertEquals(test.calculateArcCos(-1), acos(-1), EPS);
     }
 
     @Test
     public void testCalcArcCos2() {
-        try {
-            assertTrue("Test #2", isEqual(-sqrt(3) / 2));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        assertEquals(test.calculateArcCos(-sqrt(3) / 2), acos(-sqrt(3) / 2), EPS);
     }
 
     @Test
     public void testCalcArcCos3() {
-        try {
-            assertTrue("Test #3", isEqual(0));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        assertEquals(acos(0), test.calculateArcCos(0), EPS);
     }
 
     @Test
     public void testCalcArcCos4() {
-        try {
-            assertTrue("Test #4", isEqual(1));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private boolean isEqual(double x) {
-        Calculator test = new Calculator();
-        double originalRes = acos(x);
-        double customRes = test.calculateArcCos(x);
-        //System.out.println("\n\norigX: " + originalRes + "\ncustom: " + customRes); // debug
-        return abs(originalRes - customRes) < EPS;
+        assertEquals(test.calculateArcCos(1.0), acos(1.0), EPS);
     }
 
 
