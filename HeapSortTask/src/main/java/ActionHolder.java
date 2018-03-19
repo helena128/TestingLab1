@@ -20,6 +20,10 @@ public class ActionHolder {
         this.actions = actions;
     }
 
+    /**
+     * Adds action to the list
+     * @param act - new Action
+     */
     public void update(Action act) {
         actions.add(act);
     }

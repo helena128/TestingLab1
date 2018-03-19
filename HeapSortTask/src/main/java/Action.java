@@ -1,9 +1,9 @@
 package main.java;
 
 public class Action {
-    private Integer number1;
-    private Integer number2;
-    private ActionType act;
+    private Integer number1; // first number we check
+    private Integer number2; // second number we check
+    private ActionType act; // actions with numbers (swap or none)
 
     public Action(int number1, int number2, ActionType act) {
         this.number1 = number1;

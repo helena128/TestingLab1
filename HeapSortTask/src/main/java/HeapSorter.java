@@ -1,11 +1,14 @@
 package main.java;
 
+/**
+ * Class handling the main logic
+ */
 public class HeapSorter {
 
     private int[] arr;
     private int n;
 
-    private ActionHolder actionHolder; // for testing
+    private ActionHolder actionHolder; // holds actions with numbers
 
     public HeapSorter(int[] arr) {
         this.arr = arr;
@@ -19,6 +22,10 @@ public class HeapSorter {
         return actionHolder;
     }
 
+    /**
+     * Sorts array - main method
+     * @return sorted array
+     */
     public int[] sort() {
         System.out.println("Original array: ");
         printArray();
@@ -32,12 +39,19 @@ public class HeapSorter {
         return arr;
     }
 
+    /**
+     * Builds heap
+     */
     private void buildHeap() {
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(i);
         }
     }
 
+    /**
+     * Recursively build maxHeap
+     * @param idx - starting index
+     */
     private void heapify(int idx) {
         int largest = idx;
         int leftIndex = 2 * idx + 1;
@@ -60,12 +74,20 @@ public class HeapSorter {
         }
     }
 
+    /**
+     * Swaps 2 elements of the array
+     * @param idx1 - index of the 1st element
+     * @param idx2 - index of the 2nd element
+     */
     private void swap(int idx1, int idx2) {
         int tmp = arr[idx1];
         arr[idx1] = arr[idx2];
         arr[idx2] = tmp;
     }
 
+    /**
+     * Prints array separating with delimiter
+     */
     private void printArray() {
         for (int a : arr)
             System.out.print(a + "\t");
