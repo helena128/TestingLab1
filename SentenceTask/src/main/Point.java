@@ -40,14 +40,11 @@ public class Point {
             for (int i = 0; i < actionList.size(); i++) {
                 tmpAction = actionList.get(i);
 
-                // init object
-                if (i % 2 == 1) builder.append("it");
-                else if (i != 0) builder.append(" the point ");
-
                 // add action
                 builder.append(tmpAction.getDescription());
 
-                builder.append('\n');
+                if (i < actionList.size() - 1) builder.append(',');
+                builder.append("\n");
             }
         }
         return builder.toString();

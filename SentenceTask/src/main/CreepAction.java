@@ -1,6 +1,6 @@
 package main;
 
-public class CreepAction {
+public class CreepAction implements Action {
     private ActionDescription actionDescription;
 
     public CreepAction(ActionDescription actionDescription) {
@@ -8,7 +8,7 @@ public class CreepAction {
     }
 
     @Override
-    public String toString() {
+    public String getDescription() {
         return " crept up " + actionDescription.toString();
     }
 }

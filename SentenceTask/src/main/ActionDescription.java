@@ -1,7 +1,8 @@
 package main;
 
 public enum ActionDescription {
-    BY_DEGREES("by slight degrees");
+    BY_DEGREES(" by slight degrees"),
+    SIDEWAYS(" sideways");
 
     private final String value;
 

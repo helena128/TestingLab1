@@ -15,6 +15,8 @@ public class PointSentenceTest {
 
         point = new Point(null, OccurringMode.SUDDEN, LightBrightness.BLINDING);
         point.addAction(new StabbAction(PlaceDescription.OUT_DARKNESS));
+        point.addAction(new CreepAction(ActionDescription.BY_DEGREES));
+        point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE));
     }
 
     @Test
