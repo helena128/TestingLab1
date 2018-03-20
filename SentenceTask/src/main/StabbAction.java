@@ -1,14 +1,14 @@
 package main;
 
 public class StabbAction implements Action {
-    private Place actionPlace;
+    private PlaceDescription actionPlaceDescription;
 
-    public StabbAction(Place actionPlace) {
-        this.actionPlace = actionPlace;
+    public StabbAction(PlaceDescription actionPlaceDescription) {
+        this.actionPlaceDescription = actionPlaceDescription;
     }
 
     @Override
     public String getDescription() {
-        return " stabbed " + actionPlace.toString();
+        return " stabbed " + actionPlaceDescription.toString();
     }
 }

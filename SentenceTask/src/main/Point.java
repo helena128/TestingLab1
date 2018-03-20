@@ -34,7 +34,7 @@ public class Point {
 
     public String perform() {
         StringBuilder builder = new StringBuilder();
-        builder.append("A ").append(mode.getValue()).append(" point ");
+        builder.append("A ").append(mode.getValue()).append(" point ").append(light.toString());
 
         if (actionList != null) {
             for (int i = 0; i < actionList.size(); i++) {
@@ -46,6 +46,8 @@ public class Point {
 
                 // add action
                 builder.append(tmpAction.getDescription());
+
+                builder.append('\n');
             }
         }
         return builder.toString();

@@ -1,11 +1,12 @@
 package main;
 
-public enum Place {
-    OUT_DARKNESS("out of the utter darkness ");
+public enum PlaceDescription {
+    OUT_DARKNESS("out of the utter darkness "),
+    IN_BLADE("in a thin crescent blade");
 
     private final String value;
 
-    Place(String value) {
+    PlaceDescription(String value) {
         this.value = value;
     }
 
