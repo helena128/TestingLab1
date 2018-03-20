@@ -21,17 +21,3 @@ public class Crescent {
         return cresetType.getCresetType() + " crescent";
     }
 }
-
-enum CresetType {
-    NAROOW("narrow");
-
-    private String cresetType;
-
-    CresetType(String cresetType) {
-        this.cresetType = cresetType;
-    }
-
-    public String getCresetType() {
-        return cresetType;
-    }
-}

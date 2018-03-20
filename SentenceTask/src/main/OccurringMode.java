@@ -1,7 +1,7 @@
 package main;
 
 public enum OccurringMode {
-    SUDDEN("sudden");
+    SUDDEN("sudden"), UNSPECIFIED("");
 
     private String value;
 

@@ -9,6 +9,6 @@ public class StabbAction implements Action {
 
     @Override
     public String getDescription() {
-        return actionPlace + " stabbed ";
+        return " stabbed " + actionPlace.toString();
     }
 }

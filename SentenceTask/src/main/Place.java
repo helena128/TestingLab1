@@ -1,7 +1,7 @@
 package main;
 
 public enum Place {
-    OUT_DARKNESS("Out of the utter darkness ");
+    OUT_DARKNESS("out of the utter darkness ");
 
     private final String value;
 
@@ -9,7 +9,8 @@ public enum Place {
         this.value = value;
     }
 
-    public String getValue() {
+    @Override
+    public String toString() {
         return value;
     }
 }
