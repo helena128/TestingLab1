@@ -12,4 +12,19 @@ package main;
  * Tough task, heh
  */
 public class GalaxyScene {
+    private Point point;
+    private Sun sun;
+    private Shaft shaft;
+
+    public GalaxyScene(Point point, Sun sun, Shaft shaft) {
+        this.point = point;
+        this.sun = sun;
+        this.shaft = shaft;
+    }
+
+    public void doPerform() {
+        System.out.println(point.perform());
+        System.out.println(sun.perform());
+        System.out.println(shaft.perform());
+    }
 }
