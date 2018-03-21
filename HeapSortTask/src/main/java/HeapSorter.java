@@ -28,14 +28,14 @@ public class HeapSorter {
      */
     public int[] sort() {
         System.out.println("Original array: ");
-        printArray();
+        printArray(arr);
 
         //printTree();
         System.out.println("Sorting started!");
         buildHeap();
 
-        System.out.println("Sorted array: ");
-        printArray();
+        //System.out.println("Sorted array: ");
+        //printArray(arr);
         return arr;
     }
 
@@ -88,9 +88,9 @@ public class HeapSorter {
     /**
      * Prints array separating with delimiter
      */
-    private void printArray() {
-        for (int a : arr)
-            System.out.print(a + "\t");
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + "\t");
         System.out.println();
     }
 }

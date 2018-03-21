@@ -25,8 +25,7 @@ public class HeapSorterTest {
     // check null value
     @Test(expected = IllegalArgumentException.class)
     public void shouldGiveException() {
-        int[] a = null;
-        assertTrue(tester(a));
+        assertTrue(tester(null));
     }
 
 
@@ -47,6 +46,8 @@ public class HeapSorterTest {
         HeapSorter sorter = new HeapSorter(arr);
         int[] mySort = sorter.sort();
         Arrays.sort(arr);
+        System.out.println("Sorted array:");
+        sorter.printArray(mySort);
         return (mySort == arr);
     }
 
