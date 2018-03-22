@@ -1,6 +1,7 @@
 package test;
 
 import main.*;
+import main.util.ActionManager;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -58,5 +59,12 @@ public class GalaxySceneTest {
     public void test() {
         System.out.println(">> Text: ");
         scene.doPerform();
+    }
+
+    @Test
+    public void testActionSequence() {
+        for (ActionManager a : scene.getActions()) {
+            System.out.println(a.toString());
+        }
     }
 }

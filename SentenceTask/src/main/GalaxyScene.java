@@ -1,6 +1,12 @@
 package main;
 
 
+import main.util.ActionManager;
+import main.util.IObserver;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The main class where everything happens:
  *
@@ -12,14 +18,20 @@ package main;
  *
  * Tough task, heh
  */
-public class GalaxyScene {
+public class GalaxyScene implements IObserver {
     private Point point;
     private Sun sun;
     private Shaft shaft;
 
+    private List<ActionManager> actions;
+
     public GalaxyScene() {
         prepareObjects();
         initObjWithActions();
+
+        actions = new ArrayList<>();
+
+        initSubjects();
     }
 
     private void prepareObjects() {
@@ -34,6 +46,12 @@ public class GalaxyScene {
         point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE));
         sun.setAction(new BecomeVisibleAction(ActionDescription.SEARING_EDGE, OccurringMode.WITHIN_SEC));
         shaft.setAction(new StreakAction(ActionDescription.THROUGH_ATMOSPHERE));
+    }
+
+    private void initSubjects() {
+        point.addObserver(this);
+        sun.addObserver(this);
+        shaft.addObserver(this);
     }
 
 
@@ -53,5 +71,14 @@ public class GalaxyScene {
 
     public Shaft getShaft() {
         return shaft;
+    }
+
+    @Override
+    public void update(ActionManager manager) {
+        actions.add(manager);
+    }
+
+    public List<ActionManager> getActions() {
+        return actions;
     }
 }
