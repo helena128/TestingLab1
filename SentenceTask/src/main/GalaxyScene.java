@@ -76,6 +76,8 @@ public class GalaxyScene implements IObserver {
     @Override
     public void update(ActionManager manager) {
         actions.add(manager);
+        //System.out.println(this.getClass());
+        //System.out.println(">> Added, size: " + actions.size());
     }
 
     public List<ActionManager> getActions() {

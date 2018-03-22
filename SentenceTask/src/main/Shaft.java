@@ -60,8 +60,16 @@ public class Shaft implements ISubject {
     public void notifyObservers() {
         if (observers == null || observers.size() == 0) return;
         for (IObserver o : observers) {
-            o.update(new ActionManager(this, action));
+            ActionManager am = new ActionManager(this, action);
+            //System.out.println(this.getClass());
+            //System.out.println(am.toString());
+            o.update(am);
         }
+    }
+
+    @Override
+    public String describe() {
+        return toString();
     }
 
 }

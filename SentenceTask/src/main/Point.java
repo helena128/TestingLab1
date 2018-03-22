@@ -54,6 +54,7 @@ public class Point implements ISubject {
     public void notifyObservers() {
         for (IObserver o : observers) {
             o.update(new ActionManager(this, tmpAction));
+            //System.out.println(this.getClass());
         }
     }
 
@@ -100,5 +101,10 @@ public class Point implements ISubject {
 
     public Light getLight() {
         return light;
+    }
+
+    @Override
+    public String describe() {
+        return toString();
     }
 }

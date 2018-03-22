@@ -25,14 +25,22 @@ public class ActionManager {
     @Override
     public int hashCode() {
 
-        return Objects.hash(subject, action);
+        return 31 * subject.hashCode() + 7 * action.hashCode();
     }
 
     @Override
     public String toString() {
         return "ActionManager{" +
-                "subject=" + subject +
-                ", action=" + action +
+                "subject=" + subject.toString() +
+                ", action=" + action.toString() +
                 '}';
+    }
+
+    public ISubject getSubject() {
+        return subject;
+    }
+
+    public Action getAction() {
+        return action;
     }
 }

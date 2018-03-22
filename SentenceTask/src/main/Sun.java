@@ -34,6 +34,7 @@ public class Sun extends Furnace implements ISubject {
     public void notifyObservers() {
         for (IObserver o : observers) {
             o.update(new ActionManager(this, action));
+            //System.out.println(Sun.class);
         }
     }
 
@@ -54,5 +55,10 @@ public class Sun extends Furnace implements ISubject {
 
     public Action getAction() {
         return action;
+    }
+
+    @Override
+    public String describe(){
+        return toString();
     }
 }
