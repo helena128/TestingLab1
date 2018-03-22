@@ -1,5 +1,6 @@
 package main;
 
+
 /**
  * The main class where everything happens:
  *
@@ -16,11 +17,24 @@ public class GalaxyScene {
     private Sun sun;
     private Shaft shaft;
 
-    public GalaxyScene(Point point, Sun sun, Shaft shaft) {
-        this.point = point;
-        this.sun = sun;
-        this.shaft = shaft;
+    public GalaxyScene() {
+        prepareObjects();
+        initObjWithActions();
+        doPerform();
     }
+
+    private void prepareObjects() {
+        point = new Point(OccurringMode.SUDDEN, new Light(LightBrightness.BLINDING));
+        sun = new Sun();
+        shaft = new Shaft(ShaftDescription.FIERCE);
+    }
+
+    private void initObjWithActions() {
+        point.addAction(new StabbAction(PlaceDescription.OUT_DARKNESS));
+        point.addAction(new CreepAction(ActionDescription.BY_DEGREES));
+        point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE));
+    }
+
 
     public void doPerform() {
         System.out.println(point.perform());

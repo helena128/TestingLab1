@@ -14,7 +14,19 @@ public class Shaft {
         return description.toString() + " shafts of color";
     }
 
+    public Shaft(ShaftDescription description) {
+        this.description = description;
+    }
+
     public String perform() {
         return toString() + action.getDescription();
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
     }
 }

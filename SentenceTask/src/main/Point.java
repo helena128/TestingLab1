@@ -20,6 +20,18 @@ public class Point {
         this.tmpAction = null;
     }
 
+
+    public Point(OccurringMode mode, Light light) {
+        this.mode = mode;
+        this.light = light;
+    }
+
+    public void setActionList(List<Action> actionList) {
+        this.actionList = actionList;
+    }
+
+
+
     @Override
     public String toString() {
         return "A " + mode.getValue() + " point ";

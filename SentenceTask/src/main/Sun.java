@@ -7,6 +7,8 @@ public class Sun extends Furnace {
         this.action = action;
     }
 
+    public Sun() { }
+
     public String perform() {
         return toString() + action.getDescription();
     }
@@ -14,5 +16,13 @@ public class Sun extends Furnace {
     @Override
     public String toString() {
         return "two suns," + super.toString() + ",";
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Action getAction() {
+        return action;
     }
 }
