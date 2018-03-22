@@ -96,9 +96,6 @@ public class GalaxySceneTest {
             assertEquals(action.getClass(), scene.getActions().get(i).getAction().getClass());
 
             // check everything else
-            scene.getActions().get(i).getAction().getClass().cast(action);
-            scene.getActions().get(i).getSubject().getClass().cast(subject);
-
             assertTrue(action.getDescription().equals(scene.getActions().get(i).getAction().getDescription()));
             assertTrue(subject.describe().equals(scene.getActions().get(i).getSubject().describe()));
         }
