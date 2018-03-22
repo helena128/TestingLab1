@@ -1,94 +1,132 @@
 package main.java;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class handling the main logic
  */
 public class HeapSorter {
+    private int heapSize;
+    private List<Pair> pairs = new ArrayList<>();
 
-    private int[] arr;
-    private int n;
-
-    private ActionHolder actionHolder; // holds actions with numbers
-
-    public HeapSorter(int[] arr) {
-        this.arr = arr;
-        if (arr != null) {
-            n = arr.length;
-            actionHolder = new ActionHolder();
-        } else throw new IllegalArgumentException("Array is null or its size is less than 1");
+    public int getHeapSize() {
+        return heapSize;
     }
 
-    public ActionHolder getActionHolder() {
-        return actionHolder;
+    public List<Pair> getPairs() {
+        return pairs;
     }
 
     /**
-     * Sorts array - main method
-     * @return sorted array
+     * Sorting using heap sort
+     * @param a - array to sort
      */
-    public int[] sort() {
-        System.out.println("Original array: ");
-        printArray(arr);
+    public void sort(int[] a) {
+        System.out.println(">> Original array");
+        printArray(a);
 
-        //printTree();
-        System.out.println("Sorting started!");
-        buildHeap();
+        buildHeap(a);
+        while (heapSize > 1) {
+            swap(a, 0, heapSize - 1);
 
-        //System.out.println("Sorted array: ");
-        //printArray(arr);
-        return arr;
+            displayChanges(a, 0, heapSize - 1);
+            pairs.add(new Pair(a[0], a[heapSize - 1]));
+
+            heapSize--;
+            heapify(a, 0);
+        }
+
+        System.out.println(">> Sorted array");
+        printArray(a);
     }
 
+
     /**
-     * Builds heap
+     * Builds heap (heh)
+     * @param a - array to build heap from
      */
-    private void buildHeap() {
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(i);
+    private void buildHeap(int[] a) {
+        heapSize = a.length;
+        for (int i = a.length / 2; i >= 0; i--) {
+            heapify(a, i);
         }
     }
 
     /**
-     * Recursively build maxHeap
-     * @param idx - starting index
+     * Sorts heap following the rule that a[parent] >= a[child]
+     * @param a - array to sort
+     * @param i - index of the root (where start sorting)
      */
-    private void heapify(int idx) {
-        int largest = idx;
-        int leftIndex = 2 * idx + 1;
-        int rightIndex = 2 * idx + 2;
+    private void heapify(int[] a, int i) {
+        int l = left(i);
+        int r = right(i);
+        int largest = i;
 
-        if (leftIndex < n && arr[idx] < arr[leftIndex]) {
-            largest = leftIndex;
-        }
-        if (rightIndex < n && arr[largest] < arr[rightIndex]) {
-            largest = rightIndex;
+        if (l < heapSize && a[i] < a[l]) {
+            largest = l;
         }
 
-        if (largest != idx) {
-            swap(idx, largest);
-            System.out.println("Swapped: " + arr[idx] + " and " + arr[largest]);
-            actionHolder.update(new Action(arr[idx], arr[largest], ActionType.SWAP));
-            heapify(largest);
-        } else {
-            actionHolder.update(new Action(arr[idx], arr[largest], ActionType.NO_ACTION));
+        if (r < heapSize && a[largest] < a[r]) {
+            largest = r;
+        }
+
+        if (i != largest) {
+            swap(a, i, largest);
+
+            displayChanges(a, i, largest);
+            pairs.add(new Pair(a[i], a[largest]));
+
+            printArray(a);
+            heapify(a, largest);
         }
     }
 
     /**
-     * Swaps 2 elements of the array
-     * @param idx1 - index of the 1st element
-     * @param idx2 - index of the 2nd element
+     * calculate right child idx
+     * @param i - parent idx
+     * @return child idx
      */
-    private void swap(int idx1, int idx2) {
-        int tmp = arr[idx1];
-        arr[idx1] = arr[idx2];
-        arr[idx2] = tmp;
+    private int right(int i) {
+        return 2 * i + 1;
+    }
+
+    /**
+     * calculate left child idx
+     * @param i - parent idx
+     * @return child idx
+     */
+    private int left(int i) {
+        return 2 * i + 2;
+    }
+
+    /**
+     * Swaps 2 elements
+     * @param a - array with elements
+     * @param i - 1st element idx
+     * @param j - 2nd element idx
+     */
+    private void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    /**
+     *
+     * @param a - array to get elements from
+     * @param i - first element to swap
+     * @param largest - 2nd element to swap
+     */
+    private void displayChanges(int[] a, int i, int largest) {
+        System.out.println(">> Swapped: " + a[i] + " and " + a[largest]);
     }
 
     /**
      * Prints array separating with delimiter
      */
-    public static void printArray(int[] arr) {
+    private void printArray(int[] arr) {
         for (int i = 0; i < arr.length; i++)
             System.out.print(arr[i] + "\t");
         System.out.println();
