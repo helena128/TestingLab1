@@ -20,7 +20,6 @@ public class GalaxyScene {
     public GalaxyScene() {
         prepareObjects();
         initObjWithActions();
-        doPerform();
     }
 
     private void prepareObjects() {
@@ -33,6 +32,8 @@ public class GalaxyScene {
         point.addAction(new StabbAction(PlaceDescription.OUT_DARKNESS));
         point.addAction(new CreepAction(ActionDescription.BY_DEGREES));
         point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE));
+        sun.setAction(new BecomeVisibleAction(ActionDescription.SEARING_EDGE, OccurringMode.WITHIN_SEC));
+        shaft.setAction(new StreakAction(ActionDescription.THROUGH_ATMOSPHERE));
     }
 
 
@@ -40,5 +41,17 @@ public class GalaxyScene {
         System.out.println(point.perform());
         System.out.println(sun.perform());
         System.out.println(shaft.perform());
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public Sun getSun() {
+        return sun;
+    }
+
+    public Shaft getShaft() {
+        return shaft;
     }
 }

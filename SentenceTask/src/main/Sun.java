@@ -10,6 +10,7 @@ public class Sun extends Furnace {
     public Sun() { }
 
     public String perform() {
+        if (action == null) throw new NullPointerException("Sun action is not initialized");
         return toString() + action.getDescription();
     }
 

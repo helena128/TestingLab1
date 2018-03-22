@@ -29,4 +29,8 @@ public class Shaft {
     public void setAction(Action action) {
         this.action = action;
     }
+
+    public ShaftDescription getDescription() {
+        return description;
+    }
 }
