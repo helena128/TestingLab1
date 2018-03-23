@@ -80,6 +80,36 @@ public class CalculatorTest {
         catch(IllegalArgumentException e){}
     }
 
+    @Test
+    public void testNearOne() {
+        assertEquals(test.calculateArcCos(0.999), acos(0.999), EPS);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testBiggerOne() {
+        assertEquals(test.calculateArcCos(1.001), acos(1.001), EPS);
+    }
+
+    @Test
+    public void testNearMinusOne() {
+        assertEquals(test.calculateArcCos(-0.999), acos(-0.999), EPS);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testLessMinusOne() {
+        assertEquals(test.calculateArcCos(-1.001), acos(-1.001), EPS);
+    }
+
+    @Test
+    public void testLessThanZero() {
+        assertEquals(test.calculateArcCos(-0.001), acos(-0.001), EPS);
+    }
+
+    @Test
+    public void testGreaterThanZero() {
+        assertEquals(test.calculateArcCos(0.001), acos(0.001), EPS);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testCalcArcCos11() {
      assertEquals(test.calculateArcCos(2), acos(2), EPS); //x>1
