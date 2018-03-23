@@ -10,6 +10,7 @@ import java.util.List;
 public class Point implements ISubject {
     private List<Action> actionList; // list of actions
     private OccurringMode mode; // sudden
+    private CrescentDescription description;
 
     // set blinding light
     private Light light;
@@ -29,9 +30,10 @@ public class Point implements ISubject {
     }
 
 
-    public Point(OccurringMode mode, Light light) {
+    public Point(OccurringMode mode, Light light, CrescentDescription description) {
         this.mode = mode;
         this.light = light;
+        this.description = description;
         this.observers = new ArrayList<>();
     }
 
@@ -74,18 +76,30 @@ public class Point implements ISubject {
 
     public String perform() {
         StringBuilder builder = new StringBuilder();
-        builder.append("A ").append(mode.getValue()).append(" point ").append(light.toString());
+        builder.append("A ").append(mode.getValue()).append(" point").append(light.toString());
 
         if (actionList != null) {
             for (int i = 0; i < actionList.size(); i++) {
                 tmpAction = actionList.get(i);
                 notifyObservers();
 
+
                 // add action
                 builder.append(tmpAction.getDescription());
 
                 if (i < actionList.size() - 1) builder.append(',');
                 builder.append("\n");
+
+                if (tmpAction.getClass().equals(SpreadAction.class)) {
+                    Crescent crescent = new Crescent(description);
+                    builder.append("\nCreated instance of class: " + Crescent.class + "\n" + crescent.toString());
+                    try {
+                        this.finalize();
+                        builder.append("\nDisposed current instance: " + this.getClass());
+                    } catch (Throwable t) {
+                        builder.append("Couldn't finalize obj"); // TODO: comment in release
+                    }
+                }
             }
         }
         return builder.toString();

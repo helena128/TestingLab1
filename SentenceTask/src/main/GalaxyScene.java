@@ -6,6 +6,7 @@ import main.util.IObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The main class where everything happens:
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class GalaxyScene implements IObserver {
     private Point point;
-    private Sun sun;
+    private Sun[] suns;
     private Shaft shaft;
 
     private List<ActionManager> actions;
@@ -35,29 +36,41 @@ public class GalaxyScene implements IObserver {
     }
 
     private void prepareObjects() {
-        point = new Point(OccurringMode.SUDDEN, new Light(LightBrightness.BLINDING));
-        sun = new Sun();
+        point = new Point(OccurringMode.SUDDEN, new Light(LightBrightness.BLINDING), CrescentDescription.NARROW);
+        suns = new Sun[2];
+        suns[0] = new Sun(EdgeOfHorizonDesc.BLACK);
+        suns[1] = new Sun(EdgeOfHorizonDesc.BLACK);
         shaft = new Shaft(ShaftDescription.FIERCE);
     }
 
     private void initObjWithActions() {
         point.addAction(new StabbAction(PlaceDescription.OUT_DARKNESS));
         point.addAction(new CreepAction(ActionDescription.BY_DEGREES));
-        point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE));
-        sun.setAction(new BecomeVisibleAction(ActionDescription.SEARING_EDGE, OccurringMode.WITHIN_SEC));
+        point.addAction(new SpreadAction(ActionDescription.SIDEWAYS, PlaceDescription.IN_BLADE, CrescentDescription.NARROW));
+        for (int i = 0; i < suns.length; i++)
+            suns[i].setAction(new BecomeVisibleAction(ActionDescription.SEARING_EDGE, OccurringMode.WITHIN_SEC));
         shaft.setAction(new StreakAction(ActionDescription.THROUGH_ATMOSPHERE));
     }
 
     private void initSubjects() {
         point.addObserver(this);
-        sun.addObserver(this);
+        for (int i = 0; i < suns.length; i++)
+            suns[i].addObserver(this);
         shaft.addObserver(this);
     }
 
 
     public void doPerform() {
         System.out.println(point.perform());
-        System.out.println(sun.perform());
+        long start = System.nanoTime();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(">> waited " + (System.nanoTime() - start));
+        for (int i = 0; i < suns.length; i++)
+            System.out.println(suns[i].perform());
         System.out.println(shaft.perform());
     }
 
@@ -65,8 +78,8 @@ public class GalaxyScene implements IObserver {
         return point;
     }
 
-    public Sun getSun() {
-        return sun;
+    public Sun[] getSun() {
+        return suns;
     }
 
     public Shaft getShaft() {

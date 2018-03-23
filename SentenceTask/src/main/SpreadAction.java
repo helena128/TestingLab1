@@ -5,14 +5,17 @@ import java.util.Objects;
 public class SpreadAction implements Action {
     private ActionDescription actionDescription;
     private PlaceDescription placeDescription;
+    private CrescentDescription crescentDescription;
 
-    public SpreadAction(ActionDescription actionDescription, PlaceDescription placeDescription) {
+    public SpreadAction(ActionDescription actionDescription, PlaceDescription placeDescription, CrescentDescription crescentDescription) {
         this.actionDescription = actionDescription;
         this.placeDescription = placeDescription;
+        this.crescentDescription = crescentDescription;
     }
 
     @Override
     public String getDescription() {
+        //this = new Crescent(CrescentDescription.NARROW);
         return " spread " + actionDescription.toString() + " " + placeDescription;
     }
 

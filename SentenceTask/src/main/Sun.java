@@ -10,13 +10,15 @@ import java.util.List;
 public class Sun extends Furnace implements ISubject {
     private Action action;
     private List<IObserver> observers;
+    private EdgeOfHorizon edgeOfHorizon;
 
     public Sun(Action action) {
         this.action = action;
     }
 
-    public Sun() {
+    public Sun(EdgeOfHorizonDesc desc) {
         observers = new ArrayList<>();
+        edgeOfHorizon = new EdgeOfHorizon(desc);
     }
 
     @Override
@@ -46,7 +48,14 @@ public class Sun extends Furnace implements ISubject {
 
     @Override
     public String toString() {
-        return " two suns," + super.toString() + ",";
+        burn(new Flame(FlameDescription.WHITE));
+        return " sun," + super.toString() + "," ;
+    }
+
+    private void burn(Flame flame) {
+        System.out.println(">> Removing edge");
+        System.out.println(" with "  + flame.toString());
+        edgeOfHorizon = null;
     }
 
     public void setAction(Action action) {
